@@ -10,13 +10,14 @@ load: acorn/target.py build/acorn_cle_215/gateware/acorn_cle_215.bit
 	python3 acorn/target.py --uart-name=crossover --with-pcie --load
 
 module:
+	sed -i '/CSR_CRG_RST_ADDR/d' build/acorn_cle_215/driver/kernel/main.c
 	make -C build/acorn_cle_215/driver/kernel litepcie.ko
 
 .PHONY: reset
 reset: module
 	sudo ./hot_reset.sh `lspci -d 10ee:7024 -n | cut -d " " -f1`
 	cd build/acorn_cle_215/driver/kernel && sudo rmmod litepcie || echo
-	cd build/acorn_cle_215/driver/kernel && sudo bash init.sh
+	cd build/acorn_cle_215/driver/kernel && sudo bash init.sh || echo
 
 util: build/acorn_cle_215/driver/user/liblitepcie.c build/acorn_cle_215/driver/kernel/csr.h
 	make -C build/acorn_cle_215/driver/user all
