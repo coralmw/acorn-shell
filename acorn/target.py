@@ -26,7 +26,7 @@ import sys
 
 from migen import *
 
-import acorn_cle_215
+import acorn.acorn_cle_215 as acorn_cle_215
 
 from litex.soc.interconnect.csr import *
 from litex.soc.integration.soc_core import *

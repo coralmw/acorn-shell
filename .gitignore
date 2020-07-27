@@ -3,7 +3,7 @@
 !tools/liblitepcie/Makefile
 !tools/liblitepcie/setup.py
 !tools/liblitepcie/liblitepcie.i
-tools/liblitepcie/**
+# tools/liblitepcie/**
 
 litex-env/*
 !litex-env/setup.py
@@ -11,6 +11,7 @@ litex-env/*
 scratch*
 build/
 
+*.jou
 
 ## gitignore .py
 # Byte-compiled / optimized / DLL files
