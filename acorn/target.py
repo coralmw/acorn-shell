@@ -35,6 +35,7 @@ from litex.soc.integration.builder import *
 
 from litex.soc.cores.clock import *
 from litex.soc.cores.led import LedChaser
+from litex.soc.cores.xadc import *
 
 from litedram.modules import MT41K512M16
 from litedram.phy import s7ddrphy
@@ -153,6 +154,11 @@ class BaseSoC(SoCCore):
             pads         = Cat(*[platform.request("user_led", i) for i in range(4)]),
             sys_clk_freq = sys_clk_freq)
         self.add_csr("leds")
+
+        # XADC
+        self.submodules.xadc = XADC()
+        self.add_csr("xadc")
+
 
 # Build --------------------------------------------------------------------------------------------
 

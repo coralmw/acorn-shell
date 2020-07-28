@@ -3,6 +3,7 @@ import argparse
 import sys
 from os import path
 import shlex
+import code
 
 import acorn.acorn_cle_215 as acorn_cle_215
 from acorn.target import BaseSoC
@@ -51,6 +52,7 @@ def build_mod():
     finally:
         os.chdir(old_wd) # don't mess up the shell
     # built a module: if we want it in the rest of this process, invalidate cache
+    # sys.path.append(path.join(old_wd, "tools/liblitepcie"))
     importlib.invalidate_caches()
 
 def test():
@@ -62,7 +64,7 @@ def main():
     parser.add_argument("--with-pcie", action="store_true", help="Enable PCIe support", default=True)
     parser.add_argument("--driver",    action="store_true", help="Generate PCIe driver", default=False)
     parser.add_argument("--load",      action="store_true", help="Load bitstream", default=False)
-    parser.add_argument("--flash",     action="store_true", help="Flash bitstream", default=True)
+    parser.add_argument("--flash",     action="store_true", help="Flash bitstream", default=False)
     builder_args(parser)
     soc_sdram_args(parser)
     args = parser.parse_args()
@@ -99,3 +101,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    import tools.liblitepcie.liblitepcie as pcie
+    code.interact(local=dict(globals(), **locals()))
