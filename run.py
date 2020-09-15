@@ -98,8 +98,9 @@ def main():
         hot_reset()
 
     test()
+    code.interact(local=dict(globals(), **locals()))
 
 if __name__ == "__main__":
     main()
-    import tools.liblitepcie.liblitepcie as pcie
-    code.interact(local=dict(globals(), **locals()))
+    # import tools.liblitepcie.liblitepcie as pcie
+    # code.interact(local=dict(globals(), **locals()))
